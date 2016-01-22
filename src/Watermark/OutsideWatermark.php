@@ -22,7 +22,7 @@ class OutsideWatermark extends InsideWatermark
      * Adjust the size of the image and/or watermark to fit.
      * @param Image $image Intervention Image object to be adjusted.
      */
-    protected function adjustSize(Image &$image)
+    protected function adjustSize(Image & $image)
     {
         // Adjust the sizes of the image and watermark to fit.
         parent::adjustSize($image);
@@ -41,7 +41,7 @@ class OutsideWatermark extends InsideWatermark
 
     /**
      * Get a callback function to draw the background.
-     * @return callable Draws the background.
+     * @return \Closure Draws the background.
      */
     protected function getBack()
     {

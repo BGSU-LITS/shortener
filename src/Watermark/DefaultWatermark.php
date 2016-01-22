@@ -24,7 +24,7 @@ class DefaultWatermark extends AbstractWatermark implements WatermarkInterface
      * @param Image $image Intervention Image object to add the watermark to.
      * @param string $text Any text that should be added to the watermark.
      */
-    public function addTo(Image &$image, $text = '')
+    public function addTo(Image & $image, $text = '')
     {
         // Adjust the sizes of the image and watermark to fit.
         $this->adjustSize($image);
@@ -53,7 +53,7 @@ class DefaultWatermark extends AbstractWatermark implements WatermarkInterface
      *  contains the starting and ending x-position of the watermark. The
      *  second contains the starting and ending y-position.
      */
-    protected function addBack(Image &$image, array $dimensions)
+    protected function addBack(Image & $image, array $dimensions)
     {
         // Create a rectangular background at the provided coordinates.
         $image->rectangle(
@@ -72,7 +72,7 @@ class DefaultWatermark extends AbstractWatermark implements WatermarkInterface
      *  contains the starting and ending x-position of the watermark. The
      *  second contains the starting and ending y-position.
      */
-    protected function addLogo(Image &$image, array $dimensions)
+    protected function addLogo(Image & $image, array $dimensions)
     {
         // If a logo was specified, and is an existing file:
         if (self::isFile($this->logo)) {
@@ -95,7 +95,7 @@ class DefaultWatermark extends AbstractWatermark implements WatermarkInterface
      *  second contains the starting and ending y-position.
      * @param string $text The text to be added to the watermark.
      */
-    protected function addText(Image &$image, array $dimensions, $text)
+    protected function addText(Image & $image, array $dimensions, $text)
     {
         // If text was specified:
         if (!empty($text)) {
@@ -114,7 +114,7 @@ class DefaultWatermark extends AbstractWatermark implements WatermarkInterface
      * Adjust the size of the image and/or watermark to fit.
      * @param Image $image Intervention Image object to be adjusted.
      */
-    protected function adjustSize(Image &$image)
+    protected function adjustSize(Image & $image)
     {
         // Unused.
         $image;
@@ -140,7 +140,7 @@ class DefaultWatermark extends AbstractWatermark implements WatermarkInterface
 
     /**
      * Get a callback function to draw the background.
-     * @return callable Draws the background.
+     * @return \Closure Draws the background.
      */
     protected function getBack()
     {
@@ -151,7 +151,7 @@ class DefaultWatermark extends AbstractWatermark implements WatermarkInterface
 
     /**
      * Get a callback function to setup the font.
-     * @return callable Setup the font.
+     * @return \Closure Setup the font.
      */
     protected function getFont()
     {
@@ -166,7 +166,7 @@ class DefaultWatermark extends AbstractWatermark implements WatermarkInterface
     /**
      * Gets the horizontal dimensions of the watermark.
      * @param int $width The width of an entire image.
-     * @return int[] The starting and ending x-position of the watermark.
+     * @return integer[] The starting and ending x-position of the watermark.
      */
     protected function getDimensionsX($width)
     {
@@ -183,7 +183,7 @@ class DefaultWatermark extends AbstractWatermark implements WatermarkInterface
     /**
      * Gets the vertical dimensions of the watermark.
      * @param int $height The height of an entire image.
-     * @return int[] The starting and ending y-position of the watermark.
+     * @return integer[] The starting and ending y-position of the watermark.
      */
     protected function getDimensionsY($height)
     {

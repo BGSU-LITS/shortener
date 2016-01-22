@@ -8,7 +8,7 @@
  */
 
 // Autoload dependencies.
-require_once dirname(__DIR__). '/vendor/autoload.php';
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 // Create new Slim container with included settings.
 $container = new \Slim\Container(['settings' => require 'settings.php']);

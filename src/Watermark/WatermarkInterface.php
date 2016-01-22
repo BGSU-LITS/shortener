@@ -34,5 +34,5 @@ interface WatermarkInterface
      * @param string $text Text that should be added to the watermark.
      * @return null
      */
-    public function addTo(Image &$image, $text = '');
+    public function addTo(Image & $image, $text = '');
 }

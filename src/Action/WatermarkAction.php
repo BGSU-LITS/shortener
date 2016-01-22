@@ -125,7 +125,7 @@ class WatermarkAction
         $params = $req->getServerParams();
 
         // Determine the full path to the image.
-        $path = realpath($this->basepath). $args['path'];
+        $path = realpath($this->basepath) . $args['path'];
 
         // Obtain the information about the image.
         $info = getimagesize($path);
@@ -153,7 +153,7 @@ class WatermarkAction
                 $linkId = $this->saveLink($params['HTTP_REFERER']);
 
                 // Append the hash for the saved link to the text.
-                $text .= '/'. $this->hash->encode($linkId);
+                $text .= '/' . $this->hash->encode($linkId);
             }
 
             // Add a watermark with text to the image.
@@ -180,7 +180,7 @@ class WatermarkAction
         // Check if the link already exists in the database.
         $select = $this->query->newSelect()
             ->cols(['id'])
-            ->from($this->prefix. 'links')
+            ->from($this->prefix . 'links')
             ->where('link = ?', $link);
 
         // Retrieve the ID of the existing row if found.
@@ -193,7 +193,7 @@ class WatermarkAction
         if (empty($linkId)) {
             // Insert the link into the database.
             $insert = $this->query->newInsert()
-                ->into($this->prefix. 'links')
+                ->into($this->prefix . 'links')
                 ->cols(['link'])
                 ->bindValue('link', $link);
 

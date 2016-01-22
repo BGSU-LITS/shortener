@@ -21,7 +21,7 @@ return [
 
     'environments' => [
         'default_migration_table' =>
-            $container['settings']['db']['prefix']. 'phinx',
+            $container['settings']['db']['prefix'] . 'phinx',
 
         'default_database' =>
             'default',
