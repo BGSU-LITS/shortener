@@ -86,7 +86,7 @@ class RedirectAction
             // Select from the links table the row identified by the ID.
             $select = $this->query->newSelect()
                 ->cols(['link'])
-                ->from($this->prefix. 'links')
+                ->from($this->prefix . 'links')
                 ->where('id = ?', $decoded[0]);
 
             // Fetch the link from that row.

@@ -32,7 +32,7 @@ class InsideWatermark extends DefaultWatermark
      *  second contains the starting and ending y-position.
      * @param string $text The text to be added to the watermark.
      */
-    protected function addText(Image &$image, array $dimensions, $text)
+    protected function addText(Image & $image, array $dimensions, $text)
     {
         // If necessary, use the default watermark layout.
         if ($this->default) {
@@ -56,7 +56,7 @@ class InsideWatermark extends DefaultWatermark
      * Adjust the size of the image and/or watermark to fit.
      * @param Image $image Intervention Image object to be adjusted.
      */
-    protected function adjustSize(Image &$image)
+    protected function adjustSize(Image & $image)
     {
         // If a logo was specified, and is an existing file:
         if (self::isFile($this->logo)) {
@@ -89,7 +89,7 @@ class InsideWatermark extends DefaultWatermark
 
     /**
      * Get a callback function to setup the font.
-     * @return callable Setup the font.
+     * @return \Closure Setup the font.
      */
     protected function getFont()
     {
@@ -111,7 +111,7 @@ class InsideWatermark extends DefaultWatermark
     /**
      * Gets the horizontal dimensions of the watermark.
      * @param int $width The width of an entire image.
-     * @return int[] The starting and ending x-position of the watermark.
+     * @return integer[] The starting and ending x-position of the watermark.
      */
     protected function getDimensionsX($width)
     {
