@@ -26,12 +26,17 @@ class DefaultWatermark extends AbstractWatermark implements WatermarkInterface
      */
     public function addTo(Image &$image, $text = '')
     {
-        // If the sizes can be adjusted to fit the watermark to the logo:
-        if ($this->adjustSize($image)) {
+        // Adjust the sizes of the image and watermark to fit.
+        $this->adjustSize($image);
+        $width = $image->width();
+        $height = $image->height();
+
+        // If the watermark will fit on the image:
+        if ($this->isAdjusted($width, $height)) {
             // Get the dimensions of the watermark.
             $dimensions = [
-                $this->getDimensionsX($image->width()),
-                $this->getDimensionsY($image->height())
+                $this->getDimensionsX($width),
+                $this->getDimensionsY($height)
             ];
 
             // Add the watermark background, logo and text to the image.
@@ -70,7 +75,7 @@ class DefaultWatermark extends AbstractWatermark implements WatermarkInterface
     protected function addLogo(Image &$image, array $dimensions)
     {
         // If a logo was specified, and is an existing file:
-        if (!empty($this->logo) && file_exists($this->logo)) {
+        if (self::isFile($this->logo)) {
             // Insert the logo into the top left of the watermark,
             // adding 10 pixels of padding to the top and left.
             $image->insert(
@@ -108,16 +113,14 @@ class DefaultWatermark extends AbstractWatermark implements WatermarkInterface
     /**
      * Adjust the size of the image and/or watermark to fit.
      * @param Image $image Intervention Image object to be adjusted.
-     * @return boolean If the watermark can fit within the image.
      */
     protected function adjustSize(Image &$image)
     {
-        // Get the width and height of the image.
-        $imgWidth = $image->width();
-        $imgHeight = $image->height();
+        // Unused.
+        $image;
 
         // If a logo was specified, and is an existing file:
-        if (!empty($this->logo) && file_exists($this->logo)) {
+        if (self::isFile($this->logo)) {
             // Determine the width and height of the logo, adding 10 pixels of
             // padding to the left and right, and 10 pixels to the bottom.
             $logoSize = getimagesize($this->logo);
@@ -133,9 +136,6 @@ class DefaultWatermark extends AbstractWatermark implements WatermarkInterface
             // Add the logo's height to the watermark's height.
             $this->height += $logoHeight;
         }
-
-        // Return that the watermark is not bigger than the image.
-        return $this->width <= $imgWidth && $this->height <= $imgHeight;
     }
 
     /**
@@ -198,5 +198,16 @@ class DefaultWatermark extends AbstractWatermark implements WatermarkInterface
 
         // Return the dimensions offset from the start.
         return self::getStartPosition($height, $this->height, $offset);
+    }
+
+    /**
+     * Checks if the image and watermark sizes have been adjusted to fit.
+     * @param integer $width The pixel width of the image.
+     * @param integer $height The pixel height of the image.
+     * @return bool The watermark will fit on the image.
+     */
+    protected function isAdjusted($width, $height)
+    {
+        return $this->width <= $width && $this->height <= $height;
     }
 }

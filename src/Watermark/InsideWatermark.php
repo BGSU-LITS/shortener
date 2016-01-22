@@ -55,16 +55,11 @@ class InsideWatermark extends DefaultWatermark
     /**
      * Adjust the size of the image and/or watermark to fit.
      * @param Image $image Intervention Image object to be adjusted.
-     * @return boolean If the watermark can fit within the image.
      */
     protected function adjustSize(Image &$image)
     {
-        // Get the width and height of the image.
-        $imgWidth = $image->width();
-        $imgHeight = $image->height();
-
         // If a logo was specified, and is an existing file:
-        if (!empty($this->logo) && file_exists($this->logo)) {
+        if (self::isFile($this->logo)) {
             // Determine the width and height of the logo, adding 10 pixels of
             // padding to the left, and 10 pixels to the top and bottom.
             $logoSize = getimagesize($this->logo);
@@ -73,7 +68,7 @@ class InsideWatermark extends DefaultWatermark
 
             // If the width of the logo plus the width of the watermark
             // is greater than the width of the entire image:
-            if ($logoWidth + $this->width >= $imgWidth) {
+            if ($logoWidth + $this->width >= $image->width()) {
                 // Use the layout from the default watermark.
                 $this->default = true;
 
@@ -90,9 +85,6 @@ class InsideWatermark extends DefaultWatermark
                 $this->height = $logoHeight;
             }
         }
-
-        // Return that the watermark is not bigger than the image.
-        return $this->width <= $imgWidth && $this->height <= $imgHeight;
     }
 
     /**

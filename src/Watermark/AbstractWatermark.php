@@ -77,7 +77,7 @@ abstract class AbstractWatermark
     public function setFont($font)
     {
         // Set the font if it is a string name of an existing file.
-        if (is_string($font) && $font !== '' && file_exists($font)) {
+        if (self::isFile($font)) {
             $this->font = $font;
         }
 
@@ -94,7 +94,7 @@ abstract class AbstractWatermark
     public function setLogo($logo)
     {
         // Set the logo if it is a string name of an existing file.
-        if (is_string($logo) && $logo !== '' && file_exists($logo)) {
+        if (self::isFile($logo)) {
             $this->logo = $logo;
         }
     }
@@ -176,5 +176,15 @@ abstract class AbstractWatermark
 
         // Return the start and end of the range from the calculated offset.
         return [$start, $start + $range];
+    }
+
+    /**
+     * Checks if a file exists.
+     * @param string $file Full path to the file that should be checked.
+     * @return bool If the file exists.
+     */
+    protected static function isFile($file)
+    {
+        return is_string($file) && $file !== '' && file_exists($file);
     }
 }

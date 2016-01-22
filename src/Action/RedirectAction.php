@@ -72,10 +72,12 @@ class RedirectAction
      * @return Response The response from the action.
      * @throws Exception The hash ID could not be decoded, or the link for the
      *  ID couldn't be found in the table.
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function __invoke(Request $req, Response $res, array $args)
     {
+        // Unused.
+        $req;
+
         // Convert the hash into an ID.
         $decoded = $this->hash->decode($args['hash']);
 
@@ -95,7 +97,7 @@ class RedirectAction
 
             // Redirect to that link if possible.
             if (!empty($link)) {
-                return $res->withRedirect($link);
+                return $res->withStatus(302)->withHeader('Location', $link);
             }
 
             // The row with the decoded ID couldn't be found in the table.

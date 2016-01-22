@@ -118,7 +118,6 @@ class WatermarkAction
      * @param Response $res The response from the action.
      * @param array $args The arguments for the action.
      * @return Response The response from the action.
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function __invoke(Request $req, Response $res, array $args)
     {

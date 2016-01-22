@@ -45,11 +45,14 @@ class IndexAction
      * @param Response $res The response from the action.
      * @param array $args The arguments for the action.
      * @return Response The response from the action.
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function __invoke(Request $req, Response $res, array $args)
     {
+        // Unused.
+        $req;
+        $args;
+
         // Redirect to the specified URL.
-        return $res->withRedirect($this->redirect);
+        return $res->withStatus(302)->withHeader('Location', $this->redirect);
     }
 }

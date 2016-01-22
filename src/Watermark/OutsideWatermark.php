@@ -21,12 +21,14 @@ class OutsideWatermark extends InsideWatermark
     /**
      * Adjust the size of the image and/or watermark to fit.
      * @param Image $image Intervention Image object to be adjusted.
-     * @return boolean If the watermark can fit within the image.
      */
     protected function adjustSize(Image &$image)
     {
-        // If the watermark will fit the image:
-        if (parent::adjustSize($image)) {
+        // Adjust the sizes of the image and watermark to fit.
+        parent::adjustSize($image);
+
+        // If the watermark will fit on the image:
+        if ($this->isAdjusted($image->width(), $image->height())) {
             // Resize the image, adding the height of the watermark.
             $image->resizeCanvas(
                 0,
@@ -34,13 +36,7 @@ class OutsideWatermark extends InsideWatermark
                 strpos($this->position, 'top') === false ? 'top' : 'bottom',
                 true
             );
-
-            // Return that the watermark will fit.
-            return true;
         }
-
-        // Return that the watermark will not fit.
-        return false;
     }
 
     /**
