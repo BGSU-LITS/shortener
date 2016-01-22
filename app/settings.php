@@ -49,7 +49,7 @@ $settings = [
 
         // Full path to font file to be used for text added to the watermark.
         // Defaults to the bundled copy of Source Code Pro Bold.
-        'font' => dirname(__DIR__). '/fonts/SourceCodePro-Bold.ttf',
+        'font' => dirname(__DIR__) . '/fonts/SourceCodePro-Bold.ttf',
 
         // Full path to image file of a logo to be added to the watermark.
         'logo' => false,
@@ -72,7 +72,7 @@ $settings = [
 ];
 
 // Check if a .env file exists.
-$file = dirname(__DIR__). '/.env';
+$file = dirname(__DIR__) . '/.env';
 
 if (file_exists($file)) {
     // If so, load the settings from that file.

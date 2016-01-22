@@ -55,7 +55,7 @@ $container[WatermarkInterface::class] = function (Container $container) {
     }
 
     // Convert the type to a class name.
-    $class = 'App\Watermark\\'. ucwords($type). 'Watermark';
+    $class = 'App\Watermark\\' . ucwords($type) . 'Watermark';
 
     // Return a new watermark class.
     return new $class(
