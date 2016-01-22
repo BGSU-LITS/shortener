@@ -24,7 +24,6 @@ interface WatermarkInterface
      * @param integer $height The preferred height of the watemark in pixels.
      * @param string $position The position of the watermark, as a combination
      *  of 'top' or 'bottom' and 'left' or 'right' with any separators.
-     * @return null
      */
     public function __construct($font, $logo, $width, $height, $position);
 
@@ -32,7 +31,6 @@ interface WatermarkInterface
      * Adds the watermark to an existing image.
      * @param Image $image Intervention Image object to add the watermark to.
      * @param string $text Text that should be added to the watermark.
-     * @return null
      */
     public function addTo(Image & $image, $text = '');
 }

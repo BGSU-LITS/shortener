@@ -26,12 +26,12 @@ $container[ExtendedPdoInterface::class] = function (Container $container) {
 };
 
 // Add a Hash Generator to the container.
-$container[HashGenerator::class] = function (Container $container) {
+$container[HashGenerator::class] = function () {
     return new \Hashids\Hashids;
 };
 
 // Add an Intervention Image Manager to the container.
-$container[ImageManager::class] = function (Container $container) {
+$container[ImageManager::class] = function () {
     return new ImageManager;
 };
 
@@ -41,7 +41,7 @@ $container[QueryFactory::class] = function (Container $container) {
 };
 
 // Add a Url normalizer to the container.
-$container[UrlInterface::class] = function (Container $container) {
+$container[UrlInterface::class] = function () {
     return new Url;
 };
 
