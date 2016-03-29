@@ -15,5 +15,5 @@ $app->get('/', IndexAction::class);
 // Path appears to be a hash specifying a link to redirect to.
 $app->get('/{hash:[A-Za-z0-9]+}', RedirectAction::class);
 
-// Path appears to be an image that may be watermarked.
-$app->get('{path:.*(?:gif|jpe?g|png)}', WatermarkAction::class);
+// Paths that begin with /w/ specify an image to be watermarked.
+$app->get('/w{path:/.*\.(?:gif|jpe?g|png)}', WatermarkAction::class);

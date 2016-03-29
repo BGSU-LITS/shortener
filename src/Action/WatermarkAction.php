@@ -135,11 +135,8 @@ class WatermarkAction
             $res = $res->withHeader('Content-Type', $info['mime']);
         }
 
-        // If the user was redirected to the watermark URI,
-        // and the image's dimensions are within the limit:
-        if ($params['REDIRECT_URL'] === '/watermark'
-         && !empty($info[0])
-         && !empty($info[1])
+        // If the image's dimensions are within the limit:
+        if (!empty($info[0]) && !empty($info[1])
          && $info[0] * $info[1] <= $this->limit) {
             // Attempt to load the requested image.
             $image = $this->image->make($path);
