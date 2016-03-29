@@ -29,11 +29,11 @@ abstract class AbstractWatermark
 
     /**
      * The preferred width of the watermark in pixels. The default value of 270
-     * is an attempt to allow for 25 fixed width characters 10 pixels wide,
+     * is an attempt to allow for 23 fixed width characters 10 pixels wide,
      * with 10 pixels of padding on each side.
      * @var int
      */
-    protected $width = 270;
+    protected $width = 250;
 
     /**
      * The preferred height of the watermark in pixels. The default value of 35
