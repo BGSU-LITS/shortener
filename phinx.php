@@ -9,8 +9,8 @@
 
 use \Aura\Sql\ExtendedPdoInterface;
 
-// Load settings from the container.
-$container = require 'app/container.php';
+// Load settings from the application
+$settings = require 'app/settings.php';
 
 // Return Phinx Configuration.
 return [
@@ -21,17 +21,20 @@ return [
 
     'environments' => [
         'default_migration_table' =>
-            $container['settings']['db']['prefix'] . 'phinx',
+            $settings['db']['prefix'] . 'phinx',
 
         'default_database' =>
             'default',
 
         'default' => [
             'name' =>
-                $container['settings']['db']['name'],
-
+                $settings['db']['name'],
             'connection' =>
-                $container[ExtendedPdoInterface::class]
+                new \Pdo(
+                    $settings['db']['dsn'],
+                    $settings['db']['username'],
+                    $settings['db']['password']
+                )
         ]
     ]
 ];
