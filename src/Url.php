@@ -73,7 +73,9 @@ class Url implements UrlInterface
         $link = $this->normalize($url);
 
         // Check if the link already exists in the database.
-        $select = $this->query->newSelect()
+        $select = $this->query->newSelect();
+
+        $select
             ->cols(['id'])
             ->from($this->prefix . 'links')
             ->where('link = ?', $link);

@@ -92,10 +92,8 @@ class WatermarkAction
      */
     public function __invoke(Request $req, Response $res, array $args)
     {
-        if (!empty($args['path'])) {
-            // Determine the full path to the image.
-            $path = realpath($this->basepath) . $args['path'];
-        }
+        // Determine the full path to the image.
+        $path = realpath($this->basepath) . $args['path'];
 
         // Obtain the information about the image.
         $info = getimagesize($path);
