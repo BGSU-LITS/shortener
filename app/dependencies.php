@@ -41,8 +41,12 @@ $container[QueryFactory::class] = function (Container $container) {
 };
 
 // Add a Url normalizer to the container.
-$container[UrlInterface::class] = function () {
-    return new Url;
+$container[UrlInterface::class] = function (Container $container) {
+    return new Url(
+        $container[ExtendedPdoInterface::class],
+        $container[QueryFactory::class],
+        $container['settings']['db']['prefix']
+    );
 };
 
 // Add a Watermark applyer to the container.
@@ -85,14 +89,11 @@ $container[Action\RedirectAction::class] = function (Container $container) {
 // Add the watermark action to the container.
 $container[Action\WatermarkAction::class] = function (Container $container) {
     return new Action\WatermarkAction(
-        $container[ExtendedPdoInterface::class],
         $container[HashGenerator::class],
         $container[ImageManager::class],
-        $container[QueryFactory::class],
         $container[UrlInterface::class],
         $container[WatermarkInterface::class],
         $container['settings']['basepath'],
-        $container['settings']['watermark']['limit'],
-        $container['settings']['db']['prefix']
+        $container['settings']['watermark']['limit']
     );
 };
