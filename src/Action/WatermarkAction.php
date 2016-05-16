@@ -110,8 +110,8 @@ class WatermarkAction
         $files = $req->getUploadedFiles();
 
         // If an image was uploaded successfully, set the path to the file.
-        if (!empty($files['image']) &&
-            $files['image']->getError() === UPLOAD_ERR_OK) {
+        if (!empty($files['image'])
+         && $files['image']->getError() === UPLOAD_ERR_OK) {
             $args['path'] = $files['image']->getStream()->getMetadata('uri');
 
             // Retrieve the posted data.

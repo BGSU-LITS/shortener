@@ -50,7 +50,7 @@ class ErrorHandler extends \Slim\Handlers\Error
 
     /**
      * Renders the given exception as HTML.
-     * @param Exception $exception The exception to render.
+     * @param \Exception $exception The exception to render.
      * @return string The exception rendered as HTML.
      */
     protected function renderHtmlErrorMessage(\Exception $exception)

@@ -43,7 +43,7 @@ class NotAllowedHandler extends \Slim\Handlers\NotAllowed
             'title' => 'Method Not Allowed',
             'message' =>
                 '<p>You must use one of these methods: '.
-                implode(', ', $methods). '</p>'
+                implode(', ', $methods) . '</p>'
         ]);
     }
 }
