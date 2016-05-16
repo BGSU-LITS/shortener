@@ -11,6 +11,7 @@ namespace App\Action;
 
 use Aura\Sql\ExtendedPdoInterface;
 use Hashids\HashGenerator;
+use App\Exception\NotFoundException;
 use Aura\SqlQuery\QueryFactory;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -70,8 +71,8 @@ class RedirectAction
      * @param Response $res The response from the action.
      * @param array $args The arguments for the action.
      * @return Response The response from the action.
-     * @throws Exception The hash ID could not be decoded, or the link for the
-     *  ID couldn't be found in the table.
+     * @throws NotFoundException The hash ID could not be decoded, or the link
+     *  for the ID couldn't be found in the table.
      */
     public function __invoke(Request $req, Response $res, array $args)
     {
@@ -101,12 +102,14 @@ class RedirectAction
             }
 
             // The row with the decoded ID couldn't be found in the table.
-            throw new \Exception(
+            throw new NotFoundException(
                 sprintf('Link #%s could not be found.', $decoded[0])
             );
         }
 
         // The hash could not be decoded.
-        throw new \Exception('The hash ID could not be decoded.');
+        throw new NotFoundException(
+            sprintf("The hash ID '%s' could not be decoded", $args['hash'])
+        );
     }
 }

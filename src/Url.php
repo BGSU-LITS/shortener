@@ -13,7 +13,7 @@ use Aura\Sql\ExtendedPdoInterface;
 use Aura\SqlQuery\QueryFactory;
 
 /**
- * A class which allows for the normalization of a URL.
+ * A class which allows for normalizing and saving URLs.
  */
 class Url implements UrlInterface
 {
@@ -73,9 +73,7 @@ class Url implements UrlInterface
         $link = $this->normalize($url);
 
         // Check if the link already exists in the database.
-        $select = $this->query->newSelect();
-
-        $select
+        $select = $this->query->newSelect()
             ->cols(['id'])
             ->from($this->prefix . 'links')
             ->where('link = ?', $link);

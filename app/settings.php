@@ -11,8 +11,11 @@ use M1\Env\Parser;
 
 // Setup the default settings for the application.
 $settings = [
-    // Whether Whoops should be used for debugging.
+    // Allows for debugging during application development.
     'debug' => false,
+
+    // Full path to log file, if any.
+    'log' => false,
 
     // Base path of directory where shortener is installed.
     // Defaults to the current working directory.
@@ -40,6 +43,15 @@ $settings = [
 
         // Table prefix.
         'prefix' => false,
+    ],
+
+    // Template configuration.
+    'template' => [
+        // Path to search for template files before package's templates.
+        'path' => false,
+
+        // Template file that defines a page. Defaults to: page.html.twig
+        'page' => false
     ],
 
     // Watermark configuration.

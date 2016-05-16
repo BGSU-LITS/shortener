@@ -1,0 +1,102 @@
+{% set title = 'Caption an Image' %}
+{% extends [settings.template.page, 'page.html.twig'] %}
+
+{% block content %}
+{{ parent() }}
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            {{ helper.label('Image', {for: 'image'})|raw }}
+            <div class="input-group input-group-file">
+                <span class="input-group-btn">
+                    {{
+                        helper.input({
+                            type: 'button',
+                            name: false,
+                            value: 'Choose File...',
+                            attribs: {
+                                id: 'image',
+                                class: 'btn btn-file btn-success'
+                            }
+                        })
+                        |raw
+                    }}
+                </span>
+                {{
+                    helper.input({
+                        type: 'text',
+                        name: false,
+                        attribs: {
+                            class: 'form-control',
+                            readonly: true,
+                            tabindex: -1
+                        }
+                    })
+                    |raw
+                }}
+                {{
+                    helper.input({
+                        type: 'file',
+                        name: 'image',
+                        attribs: {
+                            required: true,
+                            tabindex: -1
+                        }
+                    })
+                    |raw
+                }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ helper.label('URL of Short Link', {for: 'link'})|raw }}
+            {{
+                helper.input({
+                    type: 'url',
+                    name: 'link',
+                    attribs: {
+                        id: 'link',
+                        class: 'form-control'
+                    }
+                })
+                |raw
+            }}
+        </div>
+        {{
+            helper.input({
+                type: 'submit',
+                name: false,
+                attribs: {class: 'btn btn-primary'}
+            })
+            |raw
+        }}
+        {{ helper.input(csrf)|raw }}
+    </form>
+{% endblock %}
+
+{% block styles %}
+{{ parent() }}
+    <style>
+    .input-group-file input[type=file] {
+        left: 0;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+    </style>
+{% endblock %}
+
+{% block scripts %}
+{{ parent() }}
+    <script>
+    $(document)
+        .on('change', '.input-group-file :file', function () {
+            $(this).parents('.input-group-file').find(':text').val(
+                $(this).val().replace(/\\/g, '/').replace(/.*\//, '')
+            );
+        })
+        .on('click', '.input-group-file input:not(:file)', function () {
+            $(this).parents('.input-group-file').find(':file').click();
+        });
+    </script>
+{% endblock %}
