@@ -7,5 +7,6 @@
  * @package Shortener
  */
 
-// Allow Whoops to be used for debugging.
-$app->add(new \Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware);
+// Add handlers for sessions and CSRF protection in those sessions.
+$app->add(new \Vperyod\SessionHandler\CsrfHandler);
+$app->add(new \Vperyod\SessionHandler\SessionHandler);

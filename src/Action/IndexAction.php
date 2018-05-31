@@ -9,6 +9,8 @@
 
 namespace App\Action;
 
+use App\Exception\NotFoundException;
+
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -26,13 +28,13 @@ class IndexAction
     /**
      * Construct the action with configuration.
      * @param string $redirect The link to be redirected to.
-     * @throws Exception The link to redirect to is undefined.
+     * @throws NotFoundException The link to redirect to is undefined.
      */
     public function __construct($redirect)
     {
         // The link to be redirected to must be an non-empty string.
         if (!is_string($redirect) || $redirect === '') {
-            throw new \Exception('The link to redirect to is undefined.');
+            throw new NotFoundException('No link to redirect to is defined');
         }
 
         // Set the link to be redirected to.
