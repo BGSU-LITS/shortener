@@ -16,4 +16,4 @@ $app->get('/', IndexAction::class);
 $app->get('/{hash:[A-Za-z0-9]+}', RedirectAction::class);
 
 // Paths that begin with /w/ specify an image to be watermarked.
-$app->get('/w{path:/.*\.(?:gif|jpe?g|png)}', WatermarkAction::class);
+$app->get('/w{path:/.*\.(?i)(?:gif|jpe?g|png)}', WatermarkAction::class);
